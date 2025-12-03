@@ -1,0 +1,23 @@
+{
+  "name": "experteam/indentification-number-validator",
+  "description": "PHP library for validating identification documents from multiple countries",
+  "homepage": "https://github.com/experteam-mx/indentification-number-validator.git",
+  "keywords": ["experteam", "validator", "identification"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Diego Garrido",
+      "email": "diego.garrido@experteam.com.ec",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Experteam\\IndentificationNumberValidator\\": "src/"
+    }
+  }
+}
