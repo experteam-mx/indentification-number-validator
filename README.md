@@ -36,7 +36,7 @@ $result = $validator->validate([
 More countries can be added easily.
 
 
-## ➕ Adding a New Country
+## Adding a New Country
 
 1.  Create a new validator inside `src/Validators/`.
 
