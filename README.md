@@ -29,9 +29,10 @@ $result = $validator->validate([
 
 ## Supported Countries
 
-| Country | Code | Validator Class        |
-|---------|------|------------------------|
-| Mexico  | MX   | MXValidator     |
+| Country | Code | Validator Class |
+|---------|------|-----------------|
+| Brasil  | BR   | BRValidator     |
+| GUATEMALA  | GT   | GTValidator     |
 
 More countries can be added easily.
 
@@ -43,11 +44,11 @@ More countries can be added easily.
 ``` php
 use Experteam\IndentificationNumberValidator\Contracts\IdentificationValidatorInterface;
 
-class COValidator implements IdentificationValidatorInterface
+class BRValidator implements IdentificationValidatorInterface
 {
-    public function validate(string $number): bool
+    public function validate(string $number): array
     {
-        return true;
+        return [true, "{$name} is valid."];
     }
 }
 ```
