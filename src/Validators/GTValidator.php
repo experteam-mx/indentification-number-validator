@@ -1,7 +1,7 @@
 <?php
 
 namespace Experteam\IndentificationNumberValidator\Validators;
-
+use Experteam\IndentificationNumberValidator\I18n\Translator;
 use Experteam\IndentificationNumberValidator\CountryValidatorInterface;
 
 class GTValidator implements CountryValidatorInterface
@@ -18,6 +18,13 @@ class GTValidator implements CountryValidatorInterface
                 'The fields identificationNumber and identificationCode and identificationName are required.'
             ];
         }
+        /**
+        //laravel
+        Translator::setLocale(app()->getLocale());
+        //Symfonys
+        Translator::setLocale($request->getLocale());
+        **/
+        Translator::setLocale($identification['acceptLanguage']);
 
         $number = trim($identification['identificationNumber']);
         $code = strtoupper(trim($identification['identificationCode']));
@@ -28,7 +35,9 @@ class GTValidator implements CountryValidatorInterface
             'NIT' => $this->validateNIT($number, $name),
             default => [
                 false,
-                'No validation configuration found for identificationCode: ' . $code
+                Translator::trans('invalid_code', [
+                    'code' => $code
+                ])
             ],
         };
     }
