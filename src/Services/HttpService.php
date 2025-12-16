@@ -47,7 +47,7 @@ class HttpService
         $response = json_decode($response, true);
 
         if ($response['status'] === 'error')
-            throw new \Exception($response['message']);
+            throw new \Exception('Api Service:' .$response['message']);
 
         return $response;
     }
