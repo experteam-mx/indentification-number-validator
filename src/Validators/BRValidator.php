@@ -2,9 +2,9 @@
 
 namespace Experteam\IndentificationNumberValidator\Validators;
 
+use Experteam\IndentificationNumberValidator\I18n\Translator;
 use Experteam\IndentificationNumberValidator\Services\HttpService;
 use Experteam\IndentificationNumberValidator\CountryValidatorInterface;
-
 
 class BRValidator implements CountryValidatorInterface
 {
@@ -30,7 +30,9 @@ class BRValidator implements CountryValidatorInterface
 
         return [
             false,
-            "No validation configuration found for identificationCode: {$code}"
+            Translator::trans('invalid_code', [
+                'code' => $code
+            ])
         ];
     }
 
@@ -50,7 +52,12 @@ class BRValidator implements CountryValidatorInterface
         if ($response["status"] === "fail")
             return [false, $response["data"]["message"]];
 
-        return [true, "{$name} is valid."];
+        return [
+            true,
+            Translator::trans('valid', [
+                'name' => $name
+            ])
+        ];
     }
 
 
@@ -64,7 +71,12 @@ class BRValidator implements CountryValidatorInterface
 
         foreach ($required as $field) {
             if (!isset($identification[$field]) || $identification[$field] === '') {
-                return [false, "The field {$field} is required."];
+                return [
+                    false,
+                    Translator::trans('required_field', [
+                        'field' => $field
+                    ])
+                ];
             }
         }
 
@@ -72,7 +84,10 @@ class BRValidator implements CountryValidatorInterface
             !isset($identification['parameters']) ||
             !is_array($identification['parameters'])
         ) {
-            return [false, "The field parameters is required and must be an array."];
+            return [
+                false,
+                Translator::trans('required_parameters')
+            ];
         }
 
         $paramRequired = ['apiUrl', 'token'];
@@ -82,7 +97,12 @@ class BRValidator implements CountryValidatorInterface
                 !isset($identification['parameters'][$param]) ||
                 empty($identification['parameters'][$param])
             ) {
-                return [false, "The parameter {$param} is required."];
+                return [
+                    false,
+                    Translator::trans('required_param', [
+                        'param' => $param
+                    ])
+                ];
             }
         }
 

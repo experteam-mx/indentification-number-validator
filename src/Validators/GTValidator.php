@@ -15,16 +15,9 @@ class GTValidator implements CountryValidatorInterface
         ) {
             return [
                 false,
-                'The fields identificationNumber and identificationCode and identificationName are required.'
+                Translator::trans('required_fields')
             ];
         }
-        /**
-        //laravel
-        Translator::setLocale(app()->getLocale());
-        //Symfonys
-        Translator::setLocale($request->getLocale());
-        **/
-        Translator::setLocale($identification['acceptLanguage']);
 
         $number = trim($identification['identificationNumber']);
         $code = strtoupper(trim($identification['identificationCode']));
@@ -59,9 +52,19 @@ class GTValidator implements CountryValidatorInterface
         $modulo = ($total * 10) % 11;
 
         if ($modulo === $checkDigit)
-            return [true, "{$name} is valid."];
+            return [
+                true,
+                Translator::trans('valid', [
+                    'name' => $name
+                ])
+            ];
         else
-            return [false, "Invalid {$name} format."];
+            return [
+                false,
+                Translator::trans('invalid_format', [
+                    'name' => $name
+                ])
+            ];
     }
 
     function validateNIT(string $number, string $name): array
@@ -100,10 +103,20 @@ class GTValidator implements CountryValidatorInterface
             ((string)$xMod11 === $checkDigit);
 
         if ($isValid) {
-            return [true, "{$name} is valid."];
+            return [
+                true,
+                Translator::trans('valid', [
+                    'name' => $name
+                ])
+            ];
         }
 
-        return [false, "Invalid {$name} format."];
+        return [
+            false,
+            Translator::trans('invalid_format', [
+                'name' => $name
+            ])
+        ];
     }
 
 }

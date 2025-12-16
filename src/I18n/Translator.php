@@ -4,12 +4,13 @@ namespace Experteam\IndentificationNumberValidator\I18n;
 
 class Translator
 {
-    private static string $locale = 'en';
+    const  LOCALE_EN = 'en';
+    private static string $locale = self::LOCALE_EN;
     private static array $messages = [];
 
-    public static function setLocale(string $locale): void
+    public static function setLocale(?string $locale): void
     {
-        self::$locale = $locale;
+        self::$locale = $locale ?? self::LOCALE_EN;
         self::$messages = [];
     }
 
@@ -33,7 +34,7 @@ class Translator
         $file = __DIR__ . "/lang/" . self::$locale . ".php";
 
         if (!file_exists($file)) {
-            $file = __DIR__ . "/lang/en.php";
+            $file = __DIR__ . "/lang/". self::LOCALE_EN. ".php";
         }
 
         self::$messages = require $file;
