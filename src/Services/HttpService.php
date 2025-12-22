@@ -36,7 +36,7 @@ class HttpService
             CURLOPT_POST           => true,
             CURLOPT_POSTFIELDS     => $jsonBody,
             CURLOPT_HTTPHEADER     => $headers,
-            CURLOPT_TIMEOUT        => 20,
+            CURLOPT_TIMEOUT        => 30,
         ]);
 
         $response = curl_exec($ch);

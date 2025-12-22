@@ -52,6 +52,12 @@ class BRValidator implements CountryValidatorInterface
         if ($response["status"] === "fail")
             return [false, $response["data"]["message"]];
 
+        if ($response["status"] === "success" && $response['data']['identification']['valid'] === false) {
+            return [false, Translator::trans('invalid_format', [
+                'name' => $name
+            ])];
+        }
+
         return [
             true,
             Translator::trans('valid', [
