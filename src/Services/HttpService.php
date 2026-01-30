@@ -46,6 +46,9 @@ class HttpService
         curl_close($ch);
         $response = json_decode($response, true);
 
+        if(is_null($response))
+            throw new \Exception('Api Service: System critical error' );
+
         if ($response['status'] === 'error')
             throw new \Exception('Api Service:' .$response['message']);
 

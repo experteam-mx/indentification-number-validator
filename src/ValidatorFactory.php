@@ -5,9 +5,9 @@ namespace Experteam\IndentificationNumberValidator;
 use Experteam\IndentificationNumberValidator\I18n\Translator;
 class ValidatorFactory
 {
-    public static function make(string $countryCode, string $acceptLanguage): CountryValidatorInterface
+    public static function make(string $countryCode, ?string $acceptLanguage = null): CountryValidatorInterface
     {
-        Translator::setLocale($acceptLanguage);
+        Translator::setLocale($acceptLanguage ?? 'en');
 
         return match (strtoupper($countryCode)) {
             'BR' => new Validators\BRValidator(),
