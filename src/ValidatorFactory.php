@@ -7,7 +7,7 @@ class ValidatorFactory
 {
     public static function make(string $countryCode, ?string $acceptLanguage = null): CountryValidatorInterface
     {
-        Translator::setLocale($acceptLanguage ?? 'en');
+        Translator::setLocale($acceptLanguage);
 
         return match (strtoupper($countryCode)) {
             'BR' => new Validators\BRValidator(),
